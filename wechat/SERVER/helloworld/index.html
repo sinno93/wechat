@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>
+JavaScript 能够直接写入 HTML 输出流中：
+</p>
+<input type="text">
+<script src="socket.io.js">
+</script>
+<script>
+        window.onload = function(){
+            var socket = io.connect('/');
+            socket.on('connect',function(){
+                console.log("连接成功");
+            });
+            
+        };
+    </script>
+
+<p>
+您只能在 HTML 输出流中使用 <strong>document.write</strong>。
+如果您在文档已加载后使用它（比如在函数中），会覆盖整个文档。
+</p>
+
+</body>
+</html>

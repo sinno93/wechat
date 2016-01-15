@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/my.css" />
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
+	<title></title>
+</head>
+<body>
+	<div div="main" ng-app="chatApp" ng-controller="hello">
+		<input type="text" ng-model="name">
+		<ul>
+			<li ng-repeat="item in users">{{item.name}}</li>
+		</ul>
+		<div class="login" id="login">
+			<div class="content">
+				<input type="text" ng-model="userName"  placeholder="用户名"/>
+				<input type="button" ng-click="loginClick()" value="xxx"/>
+			</div>
+		</div>
+	</div>
+	<button>清除cookie</button>
+	
+	<script>
+
+	var app = angular.module("chatApp",[]);
+	app.controller('hello',function($scope){
+		var loginDiv = document.getElementById('login');
+		init();
+		function init(){
+			if(getCookie("name")!=''&&getCookie('name')!=null){
+				console.log(getCookie('name'));
+				loginDiv.style.display = "none";
+			}
+		}
+	$scope.loginClick = function(){
+		loginDiv.style.display="none";
+		setCookie("name",$scope.userName,1);
+		alert("welcome"+$scope.userName);
+	}
+	$scope.users=[{name:"郑庆登"},{name:"嘿s嘿嘿"}]
+})
+	function setCookie(c_name,value,expiredays)
+	{
+		var exdate=new Date()
+		exdate.setDate(exdate.getDate()+expiredays)
+		document.cookie=c_name+ "=" +escape(value)+
+		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+	}
+	function getCookie(c_name)
+	{
+		if (document.cookie.length>0)
+		{
+			c_start=document.cookie.indexOf(c_name + "=")
+			if (c_start!=-1)
+			{ 
+				c_start=c_start + c_name.length+1 
+				c_end=document.cookie.indexOf(";",c_start)
+				if (c_end==-1) c_end=document.cookie.length
+					return unescape(document.cookie.substring(c_start,c_end))
+			} 
+		}
+		return ""
+	}
+
+	</script>
+</body>
+
+</html>
